@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Edit Customer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body onload="onLoad()">
+<style type=text/css>
+  body {
+   background-color: rgb(0, 15,43) ;
+  }
+  .labeltext {
+    color: white;
+    text-align: right;
+    padding-right:0px;
+    padding-bottom:1px;
+  }
+  .my-btn {
+    background-color: dodgerblue;
+    color: white;
+    padding: 0 90px;
+  }
+  .dropdown-menu {
+    background-color: lightblue;
+    padding: 0 90px;
+  }
+  .my-small-btn {
+    width:100px;
+    padding:5px;
+  }
+  h1 {
+  color: white;
+  text-align: center;
+  }
+  .rowht {
+    height:15px;
+  }
+  .input {
+    padding-left: 10px;
+  }
+</style>
+
+<h1>Edit Customer</h1>
+<div class="container">
+<br>
+<div class="row rowht">
+  <div class="col-sm-2 labeltext">First Name</div>
+  <div class="col-sm-2 input" style="color:black;"><input type="text" id="first"></div>
+  <div class="col-sm-2 labeltext">Last Name</div>
+  <div class="col-sm-3 input"><input type="text" id="last"></div>
+</div>
+<br>
+<div class="row rowht">
+  <div class="col-sm-2 labeltext">Street</div>
+  <div class="col-sm-4 input"><input type="text" style="width: 200px;" id="street"></div>
+  <div class="col-sm-6"></div>
+</div>
+<br>
+<div class="row rowht">
+  <div class="col-sm-2 labeltext">City</div>
+  <div class="col-sm-2 input"><input type="text" id="city"></div>
+  <div class="col-sm-2 labeltext">State Code</div>
+  <div class="col-sm-3 input"><input type="text" style="width: 40px;" id="state"></div>
+</div>
+<br>
+<div class="row rowht">
+  <div class="col-sm-2 labeltext">Phone Number</div>
+  <div class="col-sm-2 input"><input type="text" id="phone"></div>
+  <div class="col-sm-2 labeltext">Zip Code</div>
+  <div class="col-sm-3 input"><input type="text" style="width: 60px;" id="zip"></div>
+</div>
+<br><br>
+<div class="row">
+   <div class="col-sm-3"></div>
+   <div class="col-sm-2"> <button class="btn" type="button" onclick="submit() ">Submit</button> </div>
+   <div class="col-sm-7"></div>
+</div>
+
+<br>
+<div class="row">
+   <div class="col-sm-1"></div>
+   <div class="col-sm-10"><textarea rows="4" cols="70" id="answer"></textarea></div>
+   <div class="col-sm-1"></div>
+</div>
+
+
+</div>
+<script>
+var customerid = "";
+
+function onLoad() {
+  var inputJsonStr = window.location.search.substring(1);
+  inputJsonStr = inputJsonStr.replace(/%22/g,"\"");
+  inputJsonStr = inputJsonStr.replace(/%20/g," ");
+  //var inputJsonStr = '{{ data }}'; //'{{ data | tojson | safe }}'; //'{"id":"0","first":"John","last":"Jones","street":"100 Main St","city":"Anytown","state":"VA","zip":"10000","phone":"555-100-1000"}';    //{{ data }}; //'{{ data | tojson | safe }}';
+  console.log(inputJsonStr);
+  //inputJsonStr = inputJsonStr.substring(1,inputJsonStr.length-1);
+  //console.log(inputJsonStr);
+  inputObj = JSON.parse( inputJsonStr );
+  customerid = inputObj["id"];
+  document.getElementById("first").value = inputObj["first"];
+  document.getElementById("last").value = inputObj["last"];
+  document.getElementById("street").value = inputObj["street"];
+  document.getElementById("city").value = inputObj["city"];
+  document.getElementById("state").value = inputObj["state"];
+  document.getElementById("zip").value = inputObj["zip"];
+  document.getElementById("phone").value = inputObj["phone"];
+}
+
+function $(id) { return document.getElementById(id); }
+
+function checkRequired() {
+   var missingEntry = false;
+   var message = "";
+   var field = "";
+   if( document.getElementById("first").value.length == 0 ) { missingEntry = true;  field = "First Name"; }
+   if( document.getElementById("last").value.length == 0 ) { missingEntry = true;  field = "Last Name"; }
+   if( document.getElementById("street").value.length == 0 ) { missingEntry = true;  field = "Street"; }
+   if( document.getElementById("city").value.length == 0 ) { missingEntry = true;  field = "City"; }
+   if( document.getElementById("state").value.length == 0 ) { missingEntry = true;  field = "State"; }
+   if( document.getElementById("zip").value.length == 0 ) { missingEntry = true;  field = "Zipcode"; }
+   if( document.getElementById("phone").value.length == 0 ) { missingEntry = true;  field = "Phone Number"; }
+   if( missingEntry == true) {
+      alert ( field + " value is required." );
+   }
+   return missingEntry;
+}
+
+function submit() {
+  console.log( "submitting customer id :" + customerid );
+  var missingEntry = checkRequired();
+  if (!missingEntry ) {
+    var first = document.getElementById("first").value;
+    var last = document.getElementById("last").value;
+    var street = document.getElementById("street").value;
+    var city = document.getElementById("city").value;
+    var state = document.getElementById("state").value;
+    var zip = document.getElementById("zip").value;
+    var phone = document.getElementById("phone").value;
+    var customerParamStr = "id=" + customerid + "&first=" + first + "&last=" + last + "&street=" + street + "&city=" + city + "&state=" + state + "&zip=" + zip + "&phone=" + phone;
+    console.log( customerParamStr )
+    // url will be something like http://localhost:5000/add?arg1=2&arg2=3
+    var url = "http://localhost:3001/updateCustomer?" + customerParamStr;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200){
+        callBackFct(this);
+      }
+    }
+    xhttp.open("GET", url, true);
+    xhttp.send();
+  }
+}
+
+function callBackFct(xhttp) {
+  $("answer").value = xhttp.responseText;
+}
+</script>
+</body>
+</html>
