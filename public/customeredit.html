@@ -4,88 +4,132 @@
   <title>Edit Customer</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </head>
 <body onload="onLoad()">
 <style type=text/css>
+  * {
+  box-sizing: border-box;
+  }
   body {
    background-color: rgb(0, 15,43) ;
-  }
-  .labeltext {
-    color: white;
-    text-align: right;
-    padding-right:0px;
-    padding-bottom:1px;
-  }
-  .my-btn {
-    background-color: dodgerblue;
-    color: white;
-    padding: 0 90px;
-  }
-  .dropdown-menu {
-    background-color: lightblue;
-    padding: 0 90px;
-  }
-  .my-small-btn {
-    width:100px;
-    padding:5px;
+   font-family: Arial, Helvetica, sans-serif;
   }
   h1 {
-  color: white;
-  text-align: center;
+    color: white;
+    text-align: center;
+    font-size: 40px;
   }
-  .rowht {
-    height:15px;
-  }
-  .input {
-    padding-left: 10px;
-  }
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 8px;
+    padding: 20px;
+    border-style: solid;
+    border-color: white;
+    width: 75%
+}
+.container input {
+    width: 250px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 0px;
+}
+.container input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+.container label {
+    font-weight: bold;
+    margin-bottom: 0px;
+    display: inline-block;
+    width: 110px;
+    color: white;
+}
+.data-div {
+    margin-bottom: 8px;
+    display: block;
+}
+.noshow {
+    visibility: hidden;
+}
+.wrapper {
+    display: flex;
+    margin: auto;
+    width: 75%;
+    justify-content: center;
+}
+#statex {
+    width: 2em;
+}
+#zipcodex {
+    width: 8em;
+}
+.rowcenter {
+    display: flex;
+    justify-content: center;
+}
+.btn {
+  padding: 4px 8px;
+  font-size: 15px;
+  margin: 0 8px;
+  border-radius: 5px;
+}
 </style>
 
-<h1>Edit Customer</h1>
-<div class="container">
-<br>
-<div class="row rowht">
-  <div class="col-sm-2 labeltext">First Name</div>
-  <div class="col-sm-2 input" style="color:black;"><input type="text" id="first"></div>
-  <div class="col-sm-2 labeltext">Last Name</div>
-  <div class="col-sm-3 input"><input type="text" id="last"></div>
-</div>
-<br>
-<div class="row rowht">
-  <div class="col-sm-2 labeltext">Street</div>
-  <div class="col-sm-4 input"><input type="text" style="width: 200px;" id="street"></div>
-  <div class="col-sm-6"></div>
-</div>
-<br>
-<div class="row rowht">
-  <div class="col-sm-2 labeltext">City</div>
-  <div class="col-sm-2 input"><input type="text" id="city"></div>
-  <div class="col-sm-2 labeltext">State Code</div>
-  <div class="col-sm-3 input"><input type="text" style="width: 40px;" id="state"></div>
-</div>
-<br>
-<div class="row rowht">
-  <div class="col-sm-2 labeltext">Phone Number</div>
-  <div class="col-sm-2 input"><input type="text" id="phone"></div>
-  <div class="col-sm-2 labeltext">Zip Code</div>
-  <div class="col-sm-3 input"><input type="text" style="width: 60px;" id="zip"></div>
-</div>
-<br><br>
-<div class="row">
-   <div class="col-sm-3"></div>
-   <div class="col-sm-2"> <button class="btn" type="button" onclick="submit() ">Submit</button> </div>
-   <div class="col-sm-7"></div>
-</div>
 
-<br>
-<div class="row">
-   <div class="col-sm-1"></div>
-   <div class="col-sm-10"><textarea rows="4" cols="70" id="answer"></textarea></div>
-   <div class="col-sm-1"></div>
+<h1>Edit Customer</h1>
+<div class="wrapper">
+	<div class="container">
+    <div>
+        <div class="data-div">
+          <label for="firstname">First Name:</label>
+          <input type="text" id="firstname" name="firstname" placeholder="Enter your first name">
+        </div>
+        <div class="data-div">
+          <label for="street">Street Address:</label>
+          <input type="text" id="street" name="street" placeholder="Enter your street address">
+        </div>
+        <div class="data-div">   
+          <label for="city">City:</label>
+          <input type="text" id="city" name="city" placeholder="Enter your city">
+        </div>
+        <div class="data-div">    
+          <label for="zipcode">Zip Code:</label>
+          <input type="text" id="zipcode" name="zipcode" placeholder="Enter your Zip Code">
+        </div>
+        <div class="data-div">   
+          <label for="phonenumber">Phone:</label>
+          <input type="text" id="phonenumber" name="phonenumber" placeholder="Enter your phone number">
+        </div>    
+		  </div>
+      <div>
+        <div class="data-div">
+          <label for="lastname">Last Name:</label>
+			    <input type="text" id="lastname" name="lastname" placeholder="Enter your last name">
+        </div>
+        <div class="data-div">    
+			    <label  class="noshow" ></label>
+			    <input  class="noshow" >
+        </div>
+        <div class="data-div">    
+			    <label for="state">State:</label>
+			    <input type="text" id="state" name="state" placeholder="Enter your State">
+        </div>
+      </div>
+	  </div>
+  </div>
+  <br><br>
+  <div class="rowcenter">
+     <button class="btn" type="button" onclick="submit() ">Submit</button> 
+     <button class="btn" type="button" onclick="back()">Back</button>
+  </div>
+  </div>div>
+  <br>
+  <div class="rowcenter">
+    <div class="col-sm-10"><textarea rows="4" cols="70" id="answer"></textarea></div>
+
 </div>
 
 
@@ -103,13 +147,13 @@ function onLoad() {
   //console.log(inputJsonStr);
   inputObj = JSON.parse( inputJsonStr );
   customerid = inputObj["id"];
-  document.getElementById("first").value = inputObj["first"];
-  document.getElementById("last").value = inputObj["last"];
+  document.getElementById("firstname").value = inputObj["first"];
+  document.getElementById("lastname").value = inputObj["last"];
   document.getElementById("street").value = inputObj["street"];
   document.getElementById("city").value = inputObj["city"];
   document.getElementById("state").value = inputObj["state"];
-  document.getElementById("zip").value = inputObj["zip"];
-  document.getElementById("phone").value = inputObj["phone"];
+  document.getElementById("zipcode").value = inputObj["zip"];
+  document.getElementById("phonenumber").value = inputObj["phone"];
 }
 
 function $(id) { return document.getElementById(id); }
@@ -118,13 +162,13 @@ function checkRequired() {
    var missingEntry = false;
    var message = "";
    var field = "";
-   if( document.getElementById("first").value.length == 0 ) { missingEntry = true;  field = "First Name"; }
-   if( document.getElementById("last").value.length == 0 ) { missingEntry = true;  field = "Last Name"; }
+   if( document.getElementById("firstname").value.length == 0 ) { missingEntry = true;  field = "First Name"; }
+   if( document.getElementById("lastname").value.length == 0 ) { missingEntry = true;  field = "Last Name"; }
    if( document.getElementById("street").value.length == 0 ) { missingEntry = true;  field = "Street"; }
    if( document.getElementById("city").value.length == 0 ) { missingEntry = true;  field = "City"; }
    if( document.getElementById("state").value.length == 0 ) { missingEntry = true;  field = "State"; }
-   if( document.getElementById("zip").value.length == 0 ) { missingEntry = true;  field = "Zipcode"; }
-   if( document.getElementById("phone").value.length == 0 ) { missingEntry = true;  field = "Phone Number"; }
+   if( document.getElementById("zipcode").value.length == 0 ) { missingEntry = true;  field = "Zip Code"; }
+   if( document.getElementById("phonenumber").value.length == 0 ) { missingEntry = true;  field = "Phone Number"; }
    if( missingEntry == true) {
       alert ( field + " value is required." );
    }
@@ -135,13 +179,13 @@ function submit() {
   console.log( "submitting customer id :" + customerid );
   var missingEntry = checkRequired();
   if (!missingEntry ) {
-    var first = document.getElementById("first").value;
-    var last = document.getElementById("last").value;
+    var first = document.getElementById("firstname").value;
+    var last = document.getElementById("lastname").value;
     var street = document.getElementById("street").value;
     var city = document.getElementById("city").value;
     var state = document.getElementById("state").value;
-    var zip = document.getElementById("zip").value;
-    var phone = document.getElementById("phone").value;
+    var zip = document.getElementById("zipcode").value;
+    var phone = document.getElementById("phonenumber").value;
     var customerParamStr = "id=" + customerid + "&first=" + first + "&last=" + last + "&street=" + street + "&city=" + city + "&state=" + state + "&zip=" + zip + "&phone=" + phone;
     console.log( customerParamStr )
     // url will be something like http://localhost:5000/add?arg1=2&arg2=3
@@ -159,6 +203,10 @@ function submit() {
 
 function callBackFct(xhttp) {
   $("answer").value = xhttp.responseText;
+}
+
+function back() {
+  history.go(-1)
 }
 </script>
 </body>
